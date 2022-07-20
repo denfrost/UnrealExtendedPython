@@ -3,8 +3,13 @@
 #pragma once
 
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "UnrealExtendedPythonBPLibrary.generated.h"
 
+#if WITH_EDITOR
+#include "UnrealEdGlobals.h"
+#include "Editor/UnrealEdEngine.h"
+#endif
+
+#include "UnrealExtendedPythonBPLibrary.generated.h"
 /* 
 *	Function library class.
 *	Each function in it is expected to be static and represents blueprint node that can be called in any blueprint.
@@ -33,4 +38,9 @@ class UUnrealExtendedPythonBPLibrary : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Unreal Extended Python BPLibrary", Keywords = "UnrealExtendedPython"), Category = "UnrealExtendedPython")
 	static void UnrealCallFunction(FString InString);
 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Unreal Extended Python BPLibrary", Keywords = "UnrealExtendedPython"), Category = "UnrealExtendedPython")
+	static UActorComponent* UnrealAddComponent(TSubclassOf<class UActorComponent> ComponentClass, AActor* Actor, USceneComponent* ParentComponent, FName Name);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Unreal Extended Python BPLibrary", Keywords = "UnrealExtendedPython"), Category = "UnrealExtendedPython")
+	static UActorComponent* UnrealSubobjectDataAddComponent(TSubclassOf<class UActorComponent> ComponentClass, AActor* Actor, USceneComponent* ParentComponent, FName Name);
 };
